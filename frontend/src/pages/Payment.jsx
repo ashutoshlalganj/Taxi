@@ -316,7 +316,7 @@ const Payment = () => {
                 </button>
               ))}
             </div>
-            {method !== "Cash" && (
+            {method !== "Payment Mode" && (
               <p className="mt-1 text-[11px] text-gray-400">
                 Using Razorpay test mode – no real money will be charged in
                 sandbox.

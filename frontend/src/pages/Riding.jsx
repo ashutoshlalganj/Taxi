@@ -20,7 +20,6 @@ const Riding = () => {
   const { socket } = useContext(SocketContext)
   const navigate = useNavigate()
 
-  // safety: agar ride data nahi mila
   if (!ride) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -31,14 +30,10 @@ const Riding = () => {
     )
   }
 
-  // Socket listener – ride-ended pe home bhejo
+  // ride end listener
   useEffect(() => {
     if (!socket) return
-
-    const handleRideEnded = () => {
-      navigate('/home')
-    }
-
+    const handleRideEnded = () => navigate('/home')
     socket.on('ride-ended', handleRideEnded)
     return () => socket.off('ride-ended', handleRideEnded)
   }, [socket, navigate])
@@ -51,22 +46,19 @@ const Riding = () => {
 
   const vehicle = captain.vehicle || {}
   const plate = vehicle.plate || '—'
-  const model = vehicle.model || ''
   const color = vehicle.color || ''
   const type = vehicle.vehicleType ? capitalize(vehicle.vehicleType) : ''
-  const vehicleLabel =
-    model || [color, type].filter(Boolean).join(' ') || 'Vehicle'
+  const vehicleLabel = [color, type].filter(Boolean).join(' ') || 'Vehicle'
 
   const destinationShort = getShortLabel(ride.destination)
 
-  // 👉 Payment page pe jaayega
   const goToPayment = () => {
     navigate('/payment', { state: { ride } })
   }
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
-      {/* Home icon */}
+      {/* Home */}
       <Link
         to="/home"
         className="fixed right-2 top-2 h-10 w-10 bg-white flex items-center justify-center rounded-full shadow z-20"
@@ -74,30 +66,40 @@ const Riding = () => {
         <i className="text-lg font-medium ri-home-5-line" />
       </Link>
 
-      {/* MAP – responsive height, niche content scrollable */}
+      {/* MAP */}
       <div className="w-full h-[40vh] sm:h-[45vh] md:h-[50vh]">
         <LiveTracking pickup={ride.pickup} destination={ride.destination} />
       </div>
 
-      {/* BOTTOM SHEET – jitna content ho, utna scroll ho sakta hai */}
+      {/* BOTTOM */}
       <div className="flex-1 p-4 bg-white overflow-y-auto">
-        {/* driver + car row */}
-        <div className="flex items-center justify-between">
-          <img
-            className="h-12"
-            src="https://swyft.pl/wp-content/uploads/2023/05/how-many-people-can-a-uberx-take.jpg"
-            alt="car"
-          />
+
+        {/* DRIVER ROW (FIXED LAYOUT) */}
+        <div className="flex items-center justify-between mb-2">
+          
+          {/* LEFT: Captain name */}
+          <div className="flex items-center gap-3">
+            <img
+              className="h-12 w-12 rounded-full"
+              src="https://cdn-icons-png.flaticon.com/512/3202/3202926.png"
+              alt="Captain"
+            />
+            <h2 className="text-lg font-medium capitalize">
+              {captainName}
+            </h2>
+          </div>
+
+          {/* RIGHT: Plate + Vehicle */}
           <div className="text-right">
-            <h2 className="text-lg font-medium capitalize">{captainName}</h2>
-            <h4 className="text-xl font-semibold -mt-1 -mb-1">{plate}</h4>
+            <h4 className="text-lg font-semibold">{plate}</h4>
             <p className="text-sm text-gray-600">{vehicleLabel}</p>
           </div>
         </div>
 
         <div className="flex gap-2 justify-between flex-col items-center">
           <div className="w-full mt-5">
-            {/* Destination */}
+
+            {/* DESTINATION */}
             <div className="flex items-center gap-5 p-3 border-b">
               <i className="text-lg ri-map-pin-2-fill" />
               <div>
@@ -108,12 +110,12 @@ const Riding = () => {
               </div>
             </div>
 
-            {/* Fare */}
+            {/* FARE */}
             <div className="flex items-center gap-5 p-3">
               <i className="ri-currency-line" />
               <div>
                 <h3 className="text-lg font-medium">₹{ride.fare}</h3>
-                <p className="text-sm -mt-1 text-gray-600">Cash</p>
+                <p className="text-sm -mt-1 text-gray-600">Payment</p>
               </div>
             </div>
           </div>

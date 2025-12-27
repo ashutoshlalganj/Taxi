@@ -29,10 +29,10 @@ const Navbar = () => {
         {/* Desktop menu links – Start.jsx ke sections ke according */}
         <div className="hidden md:flex items-center gap-6 text-sm font-medium">
           <a href="#ride" className="hover:text-black text-gray-700">
-            Ride
+            User
           </a>
           <a href="#drive" className="hover:text-black text-gray-700">
-            Drive
+            Driver
           </a>
           <a href="#how-it-works" className="hover:text-black text-gray-700">
             How it works
@@ -54,7 +54,7 @@ const Navbar = () => {
             to="/login"
             className="inline-flex px-4 py-2 rounded-lg border text-sm font-medium hover:bg-gray-100"
           >
-            Sign in
+            Log in
           </Link>
           <Link
             to="/signup"
@@ -69,10 +69,10 @@ const Navbar = () => {
       <div className="md:hidden border-t border-gray-200">
         <div className="max-w-6xl mx-auto px-3 py-2 flex items-center gap-4 text-xs font-medium overflow-x-auto whitespace-nowrap">
           <a href="#ride" className="text-gray-700 hover:text-black">
-            Ride
+            User
           </a>
           <a href="#drive" className="text-gray-700 hover:text-black">
-            Drive
+            Driver
           </a>
           <a href="#how-it-works" className="text-gray-700 hover:text-black">
             How it works

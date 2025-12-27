@@ -46,11 +46,11 @@ const ConfirmRide = ({
       <h3 className="text-2xl font-semibold mb-5">Confirm your Ride</h3>
 
       <div className="flex gap-2 justify-between flex-col items-center">
-        <img
+        {/* <img
           className="h-20"
-          src="https://swyft.pl/wp-content/uploads/2023/05/how-many-people-can-a-uberx-take.jpg"
+          src="https://pngtree.com/freepng/location-map-icon-logo-symbol-vector-design-transparent-background-free_8925482.html"
           alt="vehicle"
-        />
+        /> */}
 
         <div className="w-full mt-5">
           {/* Pickup */}
@@ -82,7 +82,7 @@ const ConfirmRide = ({
               <h3 className="text-lg font-medium">
                 {amount ? `₹${amount}` : '—'}
               </h3>
-              <p className="text-sm -mt-1 text-gray-600">Cash</p>
+              <p className="text-sm -mt-1 text-gray-600">Payment</p>
             </div>
           </div>
         </div>
